@@ -1,0 +1,36 @@
+databaseChangeLog:
+  #  create table Teacher;
+  - changeSet:
+      id: Teacher
+      changes:
+        - createTable:
+            tableName: TEACHER
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TEACHER_NAME
+                  type: VARCHAR(255)
+
+  - changeSet:
+      id: TEACHER-AddNames
+      changes:
+        - sql:
+            endDelimiter: \n
+            splitStatements: false
+            sql: |
+              insert into TEACHER
+              (ID, TEACHER_NAME)
+              values ('fffffffffffffffffffffffffffffffh', 'BOB DYLAN')
+              /
+        - sql:
+            endDelimiter: \n
+            splitStatements: false
+            sql: |
+              insert into TEACHER
+              (ID, TEACHER_NAME)
+              values ('fffffffffffffffffffffffffffffffi', 'JAMELIE BOBSON')
+              /

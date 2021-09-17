@@ -1,0 +1,15 @@
+package issue;
+
+import java.util.List;
+import java.util.UUID;
+
+
+@Repository
+public interface StudentRepository extends JpaRepository<Student, UUID>{
+
+
+  @Query("SELECT name from Student s where  (:name is null or exists (select s.studentName from Student s where s.studentName LIKE '%:name%"
+      + "OR exists (select t.teacherName from Teacher t where t.teacherName LIKE '%:name%")
+  List<String> getAllByName(@Param("name") String name);
+
+}

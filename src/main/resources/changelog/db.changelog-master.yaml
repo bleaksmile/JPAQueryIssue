@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: changeset/Student.yml
+      relativeToChangelogFile: true
+  - include:
+      file: changeset/Teacher.yml
+      relativeToChangelogFile: true

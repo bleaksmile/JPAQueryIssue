@@ -1,0 +1,527 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.dwpbank.cs.kola</groupId>
+  <artifactId>jpa-parent</artifactId>
+  <version>2.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>issue</name>
+
+
+
+
+
+  <properties>
+    <version.maven>3.6.3</version.maven>
+
+    <!--Project Properties -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <versions.java>11</versions.java>
+    <maven.compiler.release>11</maven.compiler.release>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+
+
+
+
+
+    <!-- Spring -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
+    <!-- https://github.com/spring-projects/spring-boot/releases -->
+    <version.spring-boot>2.5.2</version.spring-boot>
+    <!-- https://mvnrepository.com/artifact/org.hibernate.orm.tooling/hibernate-enhance-maven-plugin -->
+    <version.hibernate-enhance-maven-plugin>5.4.32.Final</version.hibernate-enhance-maven-plugin>
+    <!-- https://search.maven.org/artifact/org.projectlombok/lombok -->
+    <!-- Requires explicit version number to compiler plugin -->
+    <version.lombok>1.18.20</version.lombok>
+
+
+
+
+    <!-- Persistence -->
+    <!-- https://search.maven.org/artifact/com.oracle.ojdbc/ojdbc10 -->
+    <version.ojdbc>19.3.0.0</version.ojdbc>
+    <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+    <version.h2>1.4.200</version.h2>
+
+
+    <!-- Maven plugins -->
+    <!-- https://mvnrepository.com/artifact/org.asciidoctor/asciidoctor-maven-plugin -->
+    <version.asciidoctor-maven-plugin>2.2.1</version.asciidoctor-maven-plugin>
+    <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
+    <version.build-helper-maven-plugin>3.2.0</version.build-helper-maven-plugin>
+    <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/buildnumber-maven-plugin -->
+    <version.buildnumber-maven-plugin>1.4</version.buildnumber-maven-plugin>
+    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-failsafe-plugin -->
+    <version.maven-failsafe-plugin>3.0.0-M5</version.maven-failsafe-plugin>
+    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+    <version.maven-jar-plugin>3.2.0</version.maven-jar-plugin>
+    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
+    <version.maven-site-plugin>3.9.1</version.maven-site-plugin>
+    <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+    <version.sonar-maven-plugin>3.9.0.2155</version.sonar-maven-plugin>
+    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
+    <version.maven-dependency-plugin>3.2.0</version.maven-dependency-plugin>
+    <!-- https://search.maven.org/artifact/com.thoughtworks.gauge.maven/gauge-maven-plugin -->
+    <version.gauge-maven-plugin>1.5.0</version.gauge-maven-plugin>
+    <!-- https://search.maven.org/artifact/pl.project13.maven/git-commit-id-plugin -->
+    <version.git-commit-id-plugin>5.0.0</version.git-commit-id-plugin>
+    <!-- https://search.maven.org/artifact/org.jacoco/jacoco-maven-plugin -->
+    <version.jacoco-maven-plugin>0.8.7</version.jacoco-maven-plugin>
+    <!-- https://search.maven.org/artifact/com.google.cloud.tools/jib-maven-plugin -->
+    <version.jib-maven-plugin>3.1.4</version.jib-maven-plugin>
+    <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+    <version.maven-compiler-plugin>3.8.1</version.maven-compiler-plugin>
+    <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+    <version.maven-surefire-plugin>3.0.0-M5</version.maven-surefire-plugin>
+    <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
+    <version.maven-resources-plugin>3.2.0</version.maven-resources-plugin>
+    <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
+    <version.versions-maven-plugin>2.8.1</version.versions-maven-plugin>
+    <version.maven-deploy-plugin>3.0.0-M1</version.maven-deploy-plugin>
+    <version.maven-clean-plugin>3.1.0</version.maven-clean-plugin>
+    <version.maven-install-plugin>2.5.2</version.maven-install-plugin>
+    <!-- https://mvnrepository.com/artifact/org.zalando/problem-spring-web -->
+    <version.problem-spring-web>0.26.2</version.problem-spring-web>
+    <version.maven-assembly-plugin>3.3.0</version.maven-assembly-plugin>
+  </properties>
+
+  <prerequisites>
+    <maven>${version.maven}</maven>
+  </prerequisites>
+
+
+  <dependencyManagement>
+    <dependencies>
+
+
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>jsr305</artifactId>
+        <version>${version.jsr305}</version>
+      </dependency>
+
+      <!-- SpringBoot -->
+      <dependency>
+        <!-- https://search.maven.org/artifact/org.springframework.boot/spring-boot-dependencies -->
+        <!-- https://github.com/spring-projects/spring-boot/releases -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${version.spring-boot}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-logging</artifactId>
+        <version>${version.spring-boot}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+        <version>${version.spring-boot}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+        <version>${version.spring-boot}</version>
+      </dependency>
+
+
+      <!-- Persistance -->
+      <dependency>
+        <!-- https://search.maven.org/artifact/com.oracle.ojdbc/ojdbc10 -->
+        <groupId>com.oracle.ojdbc</groupId>
+        <artifactId>ojdbc10</artifactId>
+        <version>${version.ojdbc}</version>
+      </dependency>
+
+
+
+      <!-- TEST -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>${version.spring-boot}</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <!-- Exclude
+            org.skyscreamer:jsonassert:jar:1.5.0:compile
+              - com.vaadin.external.google:android-json:jar:0.0.20131108.vaadin1:compile -->
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>${version.h2}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+  </dependencies>
+
+
+  <build>
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>${version.maven-site-plugin}</version>
+        <configuration>
+          <skip>true</skip>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- Migrated -->
+        <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.maven-compiler-plugin}</version>
+        <configuration>
+          <debug>true</debug>
+          <debuglevel>lines,vars,source</debuglevel>
+          <release>${maven.compiler.release}</release>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <testSource>${maven.compiler.source}</testSource>
+          <testTarget>${maven.compiler.target}</testTarget>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${version.lombok}</version>
+            </path>
+            <path>
+              <groupId>org.mapstruct</groupId>
+              <artifactId>mapstruct-processor</artifactId>
+              <version>${version.mapstruct}</version>
+            </path>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok-mapstruct-binding</artifactId>
+              <version>${version.lombok-mapstruct-binding}</version>
+            </path>
+          </annotationProcessorPaths>
+          <compilerArgs>
+            <compilerArg>
+              -Amapstruct.unmappedTargetPolicy=ERROR
+            </compilerArg>
+            <compilerArg>
+              -Amapstruct.defaultComponentModel=spring
+            </compilerArg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+
+
+      <plugin>
+        <!-- Migrated -->
+        <!-- https://mvnrepository.com/artifact/pl.project13.maven/git-commit-id-plugin -->
+        <groupId>io.github.git-commit-id</groupId>
+        <artifactId>git-commit-id-maven-plugin</artifactId>
+        <version>${version.git-commit-id-plugin}</version>
+        <executions>
+          <execution>
+            <id>get-the-git-infos</id>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+          <prefix>git</prefix>
+          <verbose>false</verbose>
+          <generateGitPropertiesFile>true</generateGitPropertiesFile>
+          <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+          <injectAllReactorProjects>true</injectAllReactorProjects>
+          <format>properties</format>
+          <gitDescribe>
+            <skip>false</skip>
+            <always>false</always>
+            <dirty>-dirty</dirty>
+          </gitDescribe>
+          <skip>${skip.git-commit-id-plugin}</skip>
+        </configuration>
+      </plugin>
+
+
+      <plugin>
+        <!-- Required for excel reports -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${version.maven-resources-plugin}</version>
+        <configuration>
+          <nonFilteredFileExtensions>
+            <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
+            <nonFilteredFileExtension>zip</nonFilteredFileExtension>
+          </nonFilteredFileExtensions>
+        </configuration>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>${version.build-helper-maven-plugin}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${version.maven-failsafe-plugin}</version>
+        <configuration>
+          <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+          <includes>
+            <include>**/*IT.java</include>
+          </includes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${version.maven-jar-plugin}</version>
+        <executions>
+          <!--execution>
+            <id>Jar Package</id>
+            <phase>package</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution-->
+          <execution>
+            <id>Jar Tests Package</id>
+            <phase>package</phase>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${version.versions-maven-plugin}</version>
+        <configuration>
+          <generateBackupPoms>false</generateBackupPoms>
+          <rulesUri>https://raw.githubusercontent.com/movewp3/version-rules/master/version-rules.xml</rulesUri>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>${version.build-helper-maven-plugin}</version>
+        </plugin>
+
+
+
+
+
+        <plugin>
+          <groupId>org.hibernate.orm.tooling</groupId>
+          <artifactId>hibernate-enhance-maven-plugin</artifactId>
+          <version>${version.hibernate-enhance-maven-plugin}</version>
+          <executions>
+            <execution>
+              <configuration>
+                <failOnError>true</failOnError>
+                <enableAssociationManagement>false</enableAssociationManagement>
+                <enableDirtyTracking>true</enableDirtyTracking>
+                <enableExtendedEnhancement>false</enableExtendedEnhancement>
+                <enableLazyInitialization>true</enableLazyInitialization>
+              </configuration>
+              <goals>
+                <goal>enhance</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+
+
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${version.maven-surefire-plugin}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${version.maven-clean-plugin}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${version.maven-deploy-plugin}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${version.maven-install-plugin}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${version.maven-jar-plugin}</version>
+        </plugin>
+
+
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>${version.sonar-maven-plugin}</version>
+        </plugin>
+
+
+
+
+        <plugin>
+          <!-- https://search.maven.org/artifact/org.springframework.boot/spring-boot-maven-plugin -->
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${version.spring-boot}</version>
+          <configuration>
+            <includeSystemScope>true</includeSystemScope>
+          </configuration>
+          <executions>
+            <execution>
+              <id>spring-boot-build-info</id>
+              <goals>
+                <goal>build-info</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>spring-boot-repackage</id>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${version.maven-dependency-plugin}</version>
+        </plugin>
+
+
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>buildnumber-maven-plugin</artifactId>
+          <version>${version.buildnumber-maven-plugin}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.asciidoctor</groupId>
+          <artifactId>asciidoctor-maven-plugin</artifactId>
+          <version>${version.asciidoctor-maven-plugin}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${version.versions-maven-plugin}</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${version.maven-assembly-plugin}</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

@@ -1,0 +1,20 @@
+package issue;
+
+import java.util.UUID;
+
+@Data
+@Entity
+@Table(name = "STUDENT")
+public class Student{
+
+  @Id
+  @Type(type = UUID_TYPE)
+  @Column(name = "ID", nullable = false, unique = true, updatable = false)
+  @Nonnull
+  private UUID id;
+
+  @Column(name="STUDENT_NAME")
+  private String studentName;
+
+
+}
